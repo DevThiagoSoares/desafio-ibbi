@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { ListDemoComponent } from './listdemo.component';
+import { ListDemoComponent } from './productsdemo.component';
 
 @NgModule({
 	imports: [RouterModule.forChild([

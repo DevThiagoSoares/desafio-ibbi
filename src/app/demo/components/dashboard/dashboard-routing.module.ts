@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
-        { path: '', component: DashboardComponent }
+        { path: 'dash', component: DashboardComponent }
     ])],
     exports: [RouterModule]
 })

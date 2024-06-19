@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ListDemoComponent } from './listdemo.component';
-import { ListDemoRoutingModule } from './listdemo-routing.module';
+import { ListDemoComponent } from './productsdemo.component';
+import { ListDemoRoutingModule } from './productsdemo-routing.module';
 import { DataViewModule } from 'primeng/dataview';
 import { PickListModule } from 'primeng/picklist';
 import { OrderListModule } from 'primeng/orderlist';
