@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   private apiUrl = 'http://127.0.0.1:8003/api';
+  private apiDollar = 'https://api.exchangerate-api.com/v4/latest/BRL'
 
   constructor(private http: HttpClient) {}
 
@@ -39,6 +40,14 @@ export class ApiService {
     return this.http.post<any>(`${this.apiUrl}/products`, data, { headers: this.getHeaders() });
   }
 
+  updateProduct(id: string, data: any): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/products/${id}`, data, { headers: this.getHeaders() });
+  }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/products/${id}`, { headers: this.getHeaders() });
+  }
+
   // Categories
   listCategories(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/categories`, { headers: this.getHeaders() });
@@ -50,5 +59,18 @@ export class ApiService {
 
   createCategory(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/categories`, data, { headers: this.getHeaders() });
+  }
+
+  updateCategory(id: string, data: any): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}/categories/${id}`, data, { headers: this.getHeaders() });
+  }
+
+  deleteCategory(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/categories/${id}`, { headers: this.getHeaders() });
+  }
+
+  // api dollar
+  getExchangeRate(): Observable<any> {
+    return this.http.get<any>(this.apiDollar);
   }
 }

@@ -17,7 +17,27 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Menu',
                 items: [
-                    { label: 'Products', icon: 'pi pi-shopping-bag', routerLink: [''] },
+                    { label: 'Loja', icon: 'pi pi-shopping-bag', routerLink: [''] },
+                    {
+                        label: 'Controle de Produtos',
+                        icon: 'pi pi-fw pi-sitemap',
+                        routerLink: ['/registration/products']
+                    },
+                    {
+                        label: 'Controle de Categorias',
+                        icon: 'pi pi-fw pi-sitemap',
+                        routerLink: ['/registration/categories']
+                    },
+                    {
+                        label: 'Controle de Usuario',
+                        icon: 'pi pi-fw pi-sitemap',
+                        routerLink: ['/registration/users']
+                    },
+                    {
+                        label: 'Carrinho de compras',
+                        icon: 'pi pi-fw pi-shopping-cart',
+                        routerLink: ['/shopping']
+                    },
                 ]
             },
             {
@@ -85,11 +105,7 @@ export class AppMenuComponent implements OnInit {
                             }
                         ]
                     },
-                    {
-                        label: 'Crud',
-                        icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
-                    },
+                   
                     {
                         label: 'Timeline',
                         icon: 'pi pi-fw pi-calendar',

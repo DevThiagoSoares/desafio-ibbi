@@ -10,6 +10,8 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                 path: '', component: AppLayoutComponent,
                 children: [
                     { path: '', loadChildren: () => import('./demo/components/products/productsdemo.module').then(m => m.ListDemoModule) },
+                    {path: 'registration', loadChildren: () => import('./demo/components/registration/registration-routing.module').then(m => m.RegistrationRoutingModule) },
+                    {path: 'shopping', loadChildren: () => import('./demo/components/shopping/shopping-routing.module').then(m => m.ShoppingRoutingModule) },
                     { path: 'uikit', loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
                     { path: 'utilities', loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
                     { path: 'documentation', loadChildren: () => import('./demo/components/documentation/documentation.module').then(m => m.DocumentationModule) },

@@ -79,3 +79,16 @@
         color: #694382;
     }
 }
+
+.product-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    transition: max-width 0.3s ease;
+  }
+  
+  .product-name:hover {
+    max-width: 1000px; /* Ajuste o valor conforme necessário */
+  }
+  

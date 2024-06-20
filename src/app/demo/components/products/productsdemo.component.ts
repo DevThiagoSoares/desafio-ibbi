@@ -6,6 +6,7 @@ export interface Product {
   image: string;
   name: string;
   price: number;
+  priceInUSD?: number; // Novo campo para preço em dólar
   quantity: number;
   category: {
     id: number;
@@ -40,8 +41,10 @@ export class ListDemoComponent implements OnInit {
         price: product.price,
         quantity: product.quantity,
         category: product.category,
-        status: this.getProductStatus(product.quantity)
+        status: this.getProductStatus(product.quantity),
+        priceInUSD: 0 // Inicialize o preço em dólar como 0
       }));
+      this.convertPricesToUSD(); // Converter preços para dólar
       this.filterProducts(); // Aplicar filtro inicialmente
     });
   }
@@ -66,7 +69,7 @@ export class ListDemoComponent implements OnInit {
 
   // Função auxiliar para determinar o status do produto com base na quantidade
   getProductStatus(quantity: number): string {
-    if (quantity > 10) {
+    if (quantity > 5) {
       return 'disponivel';
     } else if (quantity > 0) {
       return 'ultimas-unidades';
@@ -85,5 +88,16 @@ export class ListDemoComponent implements OnInit {
   onFilter(event: any): void {
     this.searchQuery = event.target.value;
     this.filterProducts(); // Aplicar filtro ao mudar o termo de busca
+  }
+
+  // Método para converter preços para dólar
+  convertPricesToUSD(): void {
+    this.apiService.getExchangeRate().subscribe((data) => {
+      const usdRate = data.rates.USD;
+      this.productsCard.forEach((product) => {
+        product.priceInUSD = product.price * usdRate;
+      });
+      this.filteredProductCards = [...this.productsCard]; // Atualizar produtos filtrados após conversão
+    });
   }
 }
