@@ -97,3 +97,8 @@
     width: 100px;
     /* Ajuste a largura conforme necessário */
 }
+
+
+.custom-multiselect .p-multiselect-close {
+    display: none !important; /* Esconde o botão 'Limpar' */
+}

@@ -11,6 +11,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { RatingModule } from 'primeng/rating';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
 	imports: [
@@ -25,6 +26,7 @@ import { ToastModule } from 'primeng/toast';
 		RatingModule,
 		ButtonModule,
 		ToastModule,
+		MultiSelectModule
 	],
 	declarations: [ListDemoComponent]
 })

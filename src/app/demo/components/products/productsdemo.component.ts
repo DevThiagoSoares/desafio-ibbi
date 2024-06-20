@@ -24,7 +24,7 @@ export class ListDemoComponent implements OnInit {
   productsCard: Product[] = [];
   filteredProductCards: Product[] = [];
   categories: any[] = []; // Array de objetos { id: number, name: string }
-  selectedCategory: number | 'todos' = 'todos';
+  selectedCategories: any[] = []; // Array para armazenar IDs das categorias selecionadas
   searchQuery: string = ''; // Adicionado para armazenar o termo de busca
 
   constructor(
@@ -60,26 +60,26 @@ export class ListDemoComponent implements OnInit {
         id: category.id,
         name: category.name
       }));
-      this.categories.unshift({ id: 'todos', name: 'Todas' }); // Adicionar opção 'All'
+      this.categories.unshift({ id: 'todos', name: 'Todas' }); // Adicionar opção 'Todas' no início
     });
   }
 
-  selectedCategories: number[] = []; // Array para armazenar IDs das categorias selecionadas
-
   // Método para tratar a mudança na seleção de categoria
   onCategoryChange(event: any): void {
-    // Se o valor for um array, são múltiplas seleções; senão, é apenas uma categoria selecionada
-    if (Array.isArray(event.value)) {
-      this.selectedCategories = event.value.map(option => option.id);
+    // Verifica se "Todas" foi selecionado
+    if (event.value && event.value.length > 0 && event.value[0].id === 'todos') {
+      // Limpa todas as seleções e define 'todos' para selecionar todas as categorias
+      this.selectedCategories = [];
     } else {
-      this.selectedCategories = [event.value.id];
+      // Se não, atualiza as categorias selecionadas
+      this.selectedCategories = event.value.map(option => option.id);
     }
     this.filterProducts(); // Aplicar filtro ao mudar a seleção de categoria
   }
 
   // Método para verificar se um produto pertence a alguma das categorias selecionadas
   productMatchesSelectedCategories(product: Product): boolean {
-    if (this.selectedCategories.length === 0 || this.selectedCategories.includes(product.category.id)) {
+    if (this.selectedCategories.length === 0 || this.selectedCategories.includes('todos') || this.selectedCategories.includes(product.category.id)) {
       return true;
     }
     return false;
@@ -93,6 +93,7 @@ export class ListDemoComponent implements OnInit {
       return matchesCategory && matchesSearch;
     });
   }
+
   // Função auxiliar para determinar o status do produto com base na quantidade
   getProductStatus(quantity: number): string {
     if (quantity > 5) {
@@ -109,6 +110,7 @@ export class ListDemoComponent implements OnInit {
     this.searchQuery = event.target.value;
     this.filterProducts(); // Aplicar filtro ao mudar o termo de busca
   }
+
   addToCart(product: Product): void {
     const payload = {
       product_id: product.id,
@@ -124,7 +126,6 @@ export class ListDemoComponent implements OnInit {
       }
     );
   }
-
 
   // Método para converter preços para dólar
   convertPricesToUSD(): void {

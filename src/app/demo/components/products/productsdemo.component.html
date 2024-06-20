@@ -1,71 +1,95 @@
 <div class="grid">
 	<div class="col-12">
-	  <div class="card">
-		<p-toast></p-toast>
-		<h5>Produtos</h5>
-		<p-dataView #dv [value]="filteredProductCards" [paginator]="true" [rows]="4" layout="grid">
-		  <ng-template pTemplate="header">
-			<div class="flex flex-column md:flex-row md:justify-content-between gap-2">
-			  <p-dropdown [options]="categories" placeholder="Categorias" [showClear]="true" (onChange)="onCategoryChange($event)" optionLabel="name"></p-dropdown>
-			  <span class="p-input-icon-left">
-				<i class="pi pi-search"></i>
-				<input type="search" pInputText placeholder="Pesquisar pelo Nome" (input)="onFilter($event)">
-			  </span>
-			  <p-dataViewLayoutOptions></p-dataViewLayoutOptions>
-			</div>
-		  </ng-template>
-  
-		  <ng-template let-product pTemplate="listItem">
-			<div class="col-12">
-			  <div class="flex flex-column md:flex-row align-items-center p-3 w-full">
-				<img [src]="product.image" [alt]="product.name" class="my-4 md:my-0 w-9 md:w-10rem h-9 md:h-10rem shadow-2 mr-5" style="object-fit: cover;" (error)="product.image = '/assets/demo/images/product/default.jpg'" />
-				<div class="flex-1 flex flex-column align-items-center text-center md:text-left">
-				  <div class="font-semibold text-2xl product-name" title="{{ product.name }}">{{ product.name }}</div>
-				  <div class="mb-2">{{ product.description }}</div>
-				  <div class="flex align-items-center mt-2">
-					<i class="pi pi-tag mr-2"></i>
-					<span class="font-semibold">{{ product.category.name }}</span>
-				  </div>
-				</div>
-				<div class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
-				  <span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">R${{ product.price.toFixed(2) }}</span>
-				  <span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">${{ product.priceInUSD.toFixed(2) }}</span>
-				  <div class="flex align-items-center justify-content-between">
-					<p-button icon="pi pi-shopping-cart" [disabled]="product.quantity === 0" (click)="addToCart(product)"></p-button>
-				  </div>
-				  <span [class]="'product-badge status-' + product.status">{{ product.status == "ultimas-unidades" ? "ultimas unidades" : product.status }}</span>
-				</div>
-			  </div>
-			</div>
-		  </ng-template>
-  
-		  <ng-template let-product pTemplate="gridItem">
-			<div class="grid grid-nogutter">
-			  <div class="col-12 md:col-4" *ngFor="let product of filteredProductCards">
-				<div class="card m-3 border-1 surface-border" style="width: 300px;">
-				  <div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
-					<div class="flex align-items-center">
-					  <i class="pi pi-tag mr-2"></i>
-					  <span class="font-semibold">{{ product.category.name }}</span>
+		<div class="card">
+			<p-toast></p-toast>
+			<h5>Produtos</h5>
+			<p-dataView #dv [value]="filteredProductCards" [paginator]="true" [rows]="4" layout="grid">
+				<ng-template pTemplate="header">
+					<div class="flex flex-column md:flex-row md:justify-content-between gap-2">
+						<!-- <p-dropdown [options]="categories" placeholder="Categorias" [showClear]="true" [filter]="true" [optionLabel]="'name'" [defaultLabel]="'Todas'" [multiple]="true" (onChange)="onCategoryChange($event)" (onClear)="clearFilters()"></p-dropdown> -->
+						<span class="p-float-label">
+							<p-multiSelect [options]="categories" placeholder="Categorias" [showClear]="false"
+								[filter]="false" [optionLabel]="'name'" [showToggleAll]="false"
+								(onChange)="onCategoryChange($event)" (onClear)="clearFilters()"
+								styleClass="custom-multiselect">
+							</p-multiSelect>
+
+							<label for="multiselect">Categorias</label>
+						</span>
+						<span class="p-input-icon-left">
+							<i class="pi pi-search"></i>
+							<input type="search" pInputText placeholder="Pesquisar pelo Nome"
+								(input)="onFilter($event)">
+						</span>
+						<p-dataViewLayoutOptions></p-dataViewLayoutOptions>
 					</div>
-					<span [class]="'product-badge status-' + product.status">{{ product.status == "ultimas-unidades" ? "ultimas unidades" : product.status }}</span>
-				  </div>
-				  <div class="flex flex-column align-items-center text-center mb-3">
-					<img [src]="product.image" [alt]="product.name" class="w-9 shadow-2 my-3 mx-0 h-9" style="object-fit: cover; height: 200px;" (error)="product.image = '/assets/demo/images/product/default.jpg'" />
-					<div class="text-2xl font-semibold product-name" title="{{ product.name }}">{{ product.name }}</div>
-					<div class="mb-3">{{ product.description }}</div>
-				  </div>
-				  <div class="flex align-items-center justify-content-between">
-					<span class="text-2xl font-semibold">R${{ product.price.toFixed(2) }}</span>
-					<span class="text-2xl font-semibold">${{ product.priceInUSD.toFixed(2) }}</span>
-					<p-button icon="pi pi-shopping-cart" [disabled]="product.quantity === 0" (click)="addToCart(product)"></p-button>
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </ng-template>
-  
-		</p-dataView>
-	  </div>
+				</ng-template>
+
+				<ng-template let-product pTemplate="listItem">
+					<div class="col-12">
+						<div class="flex flex-column md:flex-row align-items-center p-3 w-full">
+							<img [src]="product.image" [alt]="product.name"
+								class="my-4 md:my-0 w-9 md:w-10rem h-9 md:h-10rem shadow-2 mr-5"
+								style="object-fit: cover;"
+								(error)="product.image = '/assets/demo/images/product/default.jpg'" />
+							<div class="flex-1 flex flex-column align-items-center text-center md:text-left">
+								<div class="font-semibold text-2xl product-name" title="{{ product.name }}">{{
+									product.name }}</div>
+								<div class="mb-2">{{ product.description }}</div>
+								<div class="flex align-items-center mt-2">
+									<i class="pi pi-tag mr-2"></i>
+									<span class="font-semibold">{{ product.category.name }}</span>
+								</div>
+							</div>
+							<div
+								class="flex flex-row md:flex-column justify-content-between w-full md:w-auto align-items-center md:align-items-end mt-5 md:mt-0">
+								<span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">R${{
+									product.price.toFixed(2) }}</span>
+								<span class="text-2xl font-semibold mb-2 align-self-center md:align-self-end">${{
+									product.priceInUSD.toFixed(2) }}</span>
+								<div class="flex align-items-center justify-content-between">
+									<p-button icon="pi pi-shopping-cart" [disabled]="product.quantity === 0"
+										(click)="addToCart(product)"></p-button>
+								</div>
+								<span [class]="'product-badge status-' + product.status">{{ product.status ==
+									"ultimas-unidades" ? "ultimas unidades" : product.status }}</span>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+
+				<ng-template let-product pTemplate="gridItem">
+					<div class="grid grid-nogutter">
+						<div class="col-12 md:col-4" *ngFor="let product of filteredProductCards">
+							<div class="card m-3 border-1 surface-border" style="width: 300px;">
+								<div class="flex flex-wrap gap-2 align-items-center justify-content-between mb-2">
+									<div class="flex align-items-center">
+										<i class="pi pi-tag mr-2"></i>
+										<span class="font-semibold">{{ product.category.name }}</span>
+									</div>
+									<span [class]="'product-badge status-' + product.status">{{ product.status ==
+										"ultimas-unidades" ? "ultimas unidades" : product.status }}</span>
+								</div>
+								<div class="flex flex-column align-items-center text-center mb-3">
+									<img [src]="product.image" [alt]="product.name" class="w-9 shadow-2 my-3 mx-0 h-9"
+										style="object-fit: cover; height: 200px;"
+										(error)="product.image = '/assets/demo/images/product/default.jpg'" />
+									<div class="text-2xl font-semibold product-name" title="{{ product.name }}">{{
+										product.name }}</div>
+									<div class="mb-3">{{ product.description }}</div>
+								</div>
+								<div class="flex align-items-center justify-content-between">
+									<span class="text-2xl font-semibold">R${{ product.price.toFixed(2) }}</span>
+									<span class="text-2xl font-semibold">${{ product.priceInUSD.toFixed(2) }}</span>
+									<p-button icon="pi pi-shopping-cart" [disabled]="product.quantity === 0"
+										(click)="addToCart(product)"></p-button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+
+			</p-dataView>
+		</div>
 	</div>
-  </div>
+</div>
