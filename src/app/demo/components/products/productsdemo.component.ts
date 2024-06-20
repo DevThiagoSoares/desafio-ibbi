@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../service/api.service';
+import { MessageService } from 'primeng/api';
 
 export interface Product {
   id: number;
@@ -16,7 +17,8 @@ export interface Product {
 }
 
 @Component({
-  templateUrl: './productsdemo.component.html'
+  templateUrl: './productsdemo.component.html',
+  providers: [MessageService]
 })
 export class ListDemoComponent implements OnInit {
   productsCard: Product[] = [];
@@ -25,7 +27,10 @@ export class ListDemoComponent implements OnInit {
   selectedCategory: number | 'todos' = 'todos';
   searchQuery: string = ''; // Adicionado para armazenar o termo de busca
 
-  constructor(private apiService: ApiService) {}
+  constructor(
+    private messageService: MessageService,
+    private apiService: ApiService
+  ) { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -59,14 +64,35 @@ export class ListDemoComponent implements OnInit {
     });
   }
 
+  selectedCategories: number[] = []; // Array para armazenar IDs das categorias selecionadas
+
+  // Método para tratar a mudança na seleção de categoria
+  onCategoryChange(event: any): void {
+    // Se o valor for um array, são múltiplas seleções; senão, é apenas uma categoria selecionada
+    if (Array.isArray(event.value)) {
+      this.selectedCategories = event.value.map(option => option.id);
+    } else {
+      this.selectedCategories = [event.value.id];
+    }
+    this.filterProducts(); // Aplicar filtro ao mudar a seleção de categoria
+  }
+
+  // Método para verificar se um produto pertence a alguma das categorias selecionadas
+  productMatchesSelectedCategories(product: Product): boolean {
+    if (this.selectedCategories.length === 0 || this.selectedCategories.includes(product.category.id)) {
+      return true;
+    }
+    return false;
+  }
+
+  // Método para aplicar os filtros de categoria e busca
   filterProducts(): void {
     this.filteredProductCards = this.productsCard.filter(product => {
-      const matchesCategory = this.selectedCategory === 'todos' || product.category.id === this.selectedCategory;
+      const matchesCategory = this.productMatchesSelectedCategories(product);
       const matchesSearch = this.searchQuery === '' || product.name.toLowerCase().includes(this.searchQuery.toLowerCase());
       return matchesCategory && matchesSearch;
     });
   }
-
   // Função auxiliar para determinar o status do produto com base na quantidade
   getProductStatus(quantity: number): string {
     if (quantity > 5) {
@@ -78,17 +104,27 @@ export class ListDemoComponent implements OnInit {
     }
   }
 
-  // Método para tratar a mudança na seleção de categoria
-  onCategoryChange(event: any): void {
-    this.selectedCategory = event.value ? event.value.id : 'todos';
-    this.filterProducts(); // Aplicar filtro ao mudar a seleção de categoria
-  }
-
   // Método para tratar a busca por nome
   onFilter(event: any): void {
     this.searchQuery = event.target.value;
     this.filterProducts(); // Aplicar filtro ao mudar o termo de busca
   }
+  addToCart(product: Product): void {
+    const payload = {
+      product_id: product.id,
+      quantidade: 1
+    };
+
+    this.apiService.createShoppingCart(payload).subscribe(
+      () => {
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Produto adicionado ao carrinho', life: 3000 });
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao adicionar produto ao carrinho', life: 3000 });
+      }
+    );
+  }
+
 
   // Método para converter preços para dólar
   convertPricesToUSD(): void {

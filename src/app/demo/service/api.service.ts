@@ -69,6 +69,20 @@ export class ApiService {
     return this.http.delete<any>(`${this.apiUrl}/categories/${id}`, { headers: this.getHeaders() });
   }
 
+  // shopping cart
+
+  listShoppingCart(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/shopping-cart`, { headers: this.getHeaders()})
+  }
+
+  createShoppingCart(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/shopping-cart`, data, { headers: this.getHeaders() });
+  }
+
+  updateShoppingCart(data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/shopping-cart`, data, { headers: this.getHeaders() });
+  }
+
   // api dollar
   getExchangeRate(): Observable<any> {
     return this.http.get<any>(this.apiDollar);

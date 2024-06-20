@@ -86,9 +86,14 @@
     white-space: nowrap;
     max-width: 100%;
     transition: max-width 0.3s ease;
-  }
-  
-  .product-name:hover {
-    max-width: 1000px; /* Ajuste o valor conforme necessário */
-  }
-  
+}
+
+.product-name:hover {
+    max-width: 1000px;
+    /* Ajuste o valor conforme necessário */
+}
+
+.custom-input .p-inputnumber {
+    width: 100px;
+    /* Ajuste a largura conforme necessário */
+}
