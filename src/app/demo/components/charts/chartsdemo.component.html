@@ -1,0 +1,66 @@
+<div class="grid p-fluid">
+    <div class="col-12 lg:col-6">
+      <div class="card">
+        <h5>Detalhes de Produtos Vendidos</h5>
+        <p-table [value]="products" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Produto</th>
+              <th>Quantidade</th>
+              <th>Data e Hora</th>
+              <th>Comprador</th>
+              <th>Preço</th>
+              <th>Preço Total</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+              <td>{{product.product_name}}</td>
+              <td>{{product.quantity}}</td>
+              <td>{{product.date_time}}</td>
+              <td>{{product.user_name}}</td>
+              <td>{{product.price | currency}}</td>
+              <td>{{product.total_price | currency}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    
+    <div class="col-12 lg:col-6">
+      <div class="card">
+        <h5>Produtos com Estoque Baixo</h5>
+        <p-table [value]="productsStocks.slice(0, 5)" responsiveLayout="scroll">
+            <ng-template pTemplate="header">
+            <tr>
+              <th>Produto</th>
+              <th>Preço</th>
+              <th>Quantidade</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr>
+                <td>{{product.name}}</td>
+              <td>{{product.price | currency}}</td>
+              <td>{{product.quantity}}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  
+    <div class="col-12 lg:col-6">
+      <div class="card flex flex-column align-items-center">
+        <h5 class="text-left w-full">Vendas Por Categorias</h5>
+        <p-chart type="doughnut" [data]="pieData" [options]="pieOptions"></p-chart>
+      </div>
+    </div>
+  
+    <div class="col-12 lg:col-6">
+      <div class="card">
+        <h5>Top 10 Produtos Mais Vendidos</h5>
+        <p-chart type="bar" [data]="barData" [options]="barOptions"></p-chart>
+      </div>
+    </div>
+  </div>
+  

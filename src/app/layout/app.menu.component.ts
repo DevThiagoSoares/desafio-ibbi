@@ -38,6 +38,11 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-shopping-cart',
                         routerLink: ['/shopping']
                     },
+                    {
+                        label: 'Dashboard',
+                        icon: 'pi pi-fw pi-chart-pie',
+                        routerLink: ['/charts']
+                    },
                 ]
             }
         ]

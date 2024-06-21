@@ -83,6 +83,24 @@ export class ApiService {
     return this.http.put<any>(`${this.apiUrl}/shopping-cart`, data, { headers: this.getHeaders() });
   }
 
+  // dashboard
+
+  topCategories(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/dashboard/top-categories`, { headers: this.getHeaders() });
+  }
+
+  recentSales(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/dashboard/recent-sales`, { headers: this.getHeaders() });
+  }
+
+  lowStockProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/dashboard/low-stock-products`, { headers: this.getHeaders() });
+  }
+
+  topSellingProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/dashboard/top-selling-products`, { headers: this.getHeaders() });
+  }
+
   // api dollar
   getExchangeRate(): Observable<any> {
     return this.http.get<any>(this.apiDollar);
