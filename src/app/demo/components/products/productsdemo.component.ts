@@ -47,10 +47,10 @@ export class ListDemoComponent implements OnInit {
         quantity: product.quantity,
         category: product.category,
         status: this.getProductStatus(product.quantity),
-        priceInUSD: 0 // Inicialize o preço em dólar como 0
+        priceInUSD: 0 
       }));
-      this.convertPricesToUSD(); // Converter preços para dólar
-      this.filterProducts(); // Aplicar filtro inicialmente
+      this.convertPricesToUSD(); 
+      this.filterProducts(); 
     });
   }
 
@@ -60,24 +60,20 @@ export class ListDemoComponent implements OnInit {
         id: category.id,
         name: category.name
       }));
-      this.categories.unshift({ id: 'todos', name: 'Todas' }); // Adicionar opção 'Todas' no início
+      this.categories.unshift({ id: 'todos', name: 'Todas' });
     });
   }
 
-  // Método para tratar a mudança na seleção de categoria
+  
   onCategoryChange(event: any): void {
-    // Verifica se "Todas" foi selecionado
     if (event.value && event.value.length > 0 && event.value[0].id === 'todos') {
-      // Limpa todas as seleções e define 'todos' para selecionar todas as categorias
       this.selectedCategories = [];
     } else {
-      // Se não, atualiza as categorias selecionadas
       this.selectedCategories = event.value.map(option => option.id);
     }
-    this.filterProducts(); // Aplicar filtro ao mudar a seleção de categoria
+    this.filterProducts(); 
   }
 
-  // Método para verificar se um produto pertence a alguma das categorias selecionadas
   productMatchesSelectedCategories(product: Product): boolean {
     if (this.selectedCategories.length === 0 || this.selectedCategories.includes('todos') || this.selectedCategories.includes(product.category.id)) {
       return true;
@@ -85,7 +81,6 @@ export class ListDemoComponent implements OnInit {
     return false;
   }
 
-  // Método para aplicar os filtros de categoria e busca
   filterProducts(): void {
     this.filteredProductCards = this.productsCard.filter(product => {
       const matchesCategory = this.productMatchesSelectedCategories(product);
@@ -94,7 +89,6 @@ export class ListDemoComponent implements OnInit {
     });
   }
 
-  // Função auxiliar para determinar o status do produto com base na quantidade
   getProductStatus(quantity: number): string {
     if (quantity > 5) {
       return 'disponivel';
@@ -105,10 +99,9 @@ export class ListDemoComponent implements OnInit {
     }
   }
 
-  // Método para tratar a busca por nome
   onFilter(event: any): void {
     this.searchQuery = event.target.value;
-    this.filterProducts(); // Aplicar filtro ao mudar o termo de busca
+    this.filterProducts(); 
   }
 
   addToCart(product: Product): void {
@@ -127,14 +120,13 @@ export class ListDemoComponent implements OnInit {
     );
   }
 
-  // Método para converter preços para dólar
   convertPricesToUSD(): void {
     this.apiService.getExchangeRate().subscribe((data) => {
       const usdRate = data.rates.USD;
       this.productsCard.forEach((product) => {
         product.priceInUSD = product.price * usdRate;
       });
-      this.filteredProductCards = [...this.productsCard]; // Atualizar produtos filtrados após conversão
+      this.filteredProductCards = [...this.productsCard];
     });
   }
 }
