@@ -17,6 +17,9 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
+import { MenusModule } from '../demo/components/uikit/menus/menus.module';
+import { MenuModule } from 'primeng/menu';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 @NgModule({
     declarations: [
@@ -39,7 +42,9 @@ import { AppLayoutComponent } from "./app.layout.component";
         InputSwitchModule,
         RippleModule,
         RouterModule,
-        AppConfigModule
+        AppConfigModule,
+        MenuModule,
+        PanelMenuModule,
     ],
     exports: [AppLayoutComponent]
 })
