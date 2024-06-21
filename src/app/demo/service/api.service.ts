@@ -83,6 +83,12 @@ export class ApiService {
     return this.http.put<any>(`${this.apiUrl}/shopping-cart`, data, { headers: this.getHeaders() });
   }
 
+  // compra
+
+  finalize(): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/purchase/finalize`, { headers: this.getHeaders() });
+  }
+
   // dashboard
 
   topCategories(): Observable<any[]> {

@@ -2,27 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ApiService } from 'src/app/demo/service/api.service';
 
-interface CartItem {
-  product_id: string;
-  quantity: number;
-  price_per_unit: number;
-  total_price: number;
-  image: string;
-  name: string;
-}
-
-interface Cart {
-  user_id: number;
-  total_cart_value: number;
-  products: CartItem[];
-}
-
 @Component({
   templateUrl: './shopping.component.html',
   providers: [MessageService]
 })
 export class ShoppingComponent implements OnInit {
-  cart: Cart | undefined;
+  cart: any | undefined;
+  displayConfirmFinalize: boolean = false;
+  displayConfirmClearCart: boolean = false;
 
   constructor(
     private messageService: MessageService,
@@ -58,6 +45,7 @@ export class ShoppingComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao limpar o carrinho', life: 3000 });
       }
     );
+    this.displayConfirmClearCart = false;
   }
 
   removeFromCart(productId: string) {
@@ -73,8 +61,8 @@ export class ShoppingComponent implements OnInit {
     );
   }
 
-  updateCartItem(productId: Cart, newQuantity: any) {
-    const itemToUpdate = [{ product_id: productId, quantity: newQuantity.value }];
+  updateCartItem(productId: string, newQuantity: number) {
+    const itemToUpdate = [{ product_id: productId, quantity: newQuantity }];
     this.cartService.updateShoppingCart(itemToUpdate).subscribe(
       () => {
         this.loadCart();
@@ -84,5 +72,38 @@ export class ShoppingComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao atualizar a quantidade', life: 3000 });
       }
     );
+  }
+
+  confirmFinalize() {
+    this.displayConfirmFinalize = true;
+  }
+
+  confirmClearCart() {
+    this.displayConfirmClearCart = true;
+  }
+
+  hideConfirmFinalizeDialog() {
+    this.displayConfirmFinalize = false;
+  }
+
+  hideConfirmCleanCartDialog() {
+    this.displayConfirmClearCart = false;
+  }
+
+  finalizePurchase() {
+    this.cartService.finalize().subscribe(
+      () => {
+        this.loadCart();
+        this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Compra finalizada com sucesso', life: 3000 });
+      },
+      (error) => {
+        this.messageService.add({ severity: 'error', summary: 'Erro', detail: 'Erro ao finalizar a compra', life: 3000 });
+      }
+    );
+    this.displayConfirmFinalize = false;
+  }
+
+  isCartEmpty(): boolean {
+    return !this.cart || !this.cart.products || this.cart.products.length === 0;
   }
 }

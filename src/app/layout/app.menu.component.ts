@@ -29,11 +29,6 @@ export class AppMenuComponent implements OnInit {
                         routerLink: ['/registration/categories']
                     },
                     {
-                        label: 'Controle de Usuario',
-                        icon: 'pi pi-fw pi-sitemap',
-                        routerLink: ['/registration/users']
-                    },
-                    {
                         label: 'Carrinho de compras',
                         icon: 'pi pi-fw pi-shopping-cart',
                         routerLink: ['/shopping']

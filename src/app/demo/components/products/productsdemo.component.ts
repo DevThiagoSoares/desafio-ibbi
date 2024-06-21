@@ -7,7 +7,7 @@ export interface Product {
   image: string;
   name: string;
   price: number;
-  priceInUSD?: number; // Novo campo para preço em dólar
+  priceInUSD?: number;
   quantity: number;
   category: {
     id: number;
@@ -23,9 +23,9 @@ export interface Product {
 export class ListDemoComponent implements OnInit {
   productsCard: Product[] = [];
   filteredProductCards: Product[] = [];
-  categories: any[] = []; // Array de objetos { id: number, name: string }
-  selectedCategories: any[] = []; // Array para armazenar IDs das categorias selecionadas
-  searchQuery: string = ''; // Adicionado para armazenar o termo de busca
+  categories: any[] = []; 
+  selectedCategories: any[] = []; 
+  searchQuery: string = '';
 
   constructor(
     private messageService: MessageService,

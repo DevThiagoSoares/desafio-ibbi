@@ -5,12 +5,19 @@
             <p-toolbar styleClass="mb-4">
                 <ng-template pTemplate="left">
                     <div class="my-2">
-                        <button pButton pRipple label="Limpar Carrinho" icon="pi pi-times" class="p-button-danger" (click)="clearCart()"></button>
+                        <button pButton pRipple label="Limpar Carrinho" icon="pi pi-times" class="p-button-danger"
+                            (click)="confirmClearCart()" [disabled]="isCartEmpty()"></button>
                     </div>
+                </ng-template>
+                <ng-template pTemplate="right">
+                    <button pButton pRipple label="Finalizar Compra" icon="pi pi-money-bill"
+                        class="p-button-success mr-2" (click)="confirmFinalize()" [disabled]="isCartEmpty()"></button>
                 </ng-template>
             </p-toolbar>
 
-            <p-table *ngIf="cart" #dt [value]="cart.products" responsiveLayout="scroll" [rows]="10" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas" dataKey="product_id">
+            <p-table *ngIf="cart" #dt [value]="cart.products" responsiveLayout="scroll" [rows]="10" [paginator]="true"
+                [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true"
+                currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} entradas" dataKey="product_id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
                         <h5 class="m-0">Itens no Carrinho</h5>
@@ -21,7 +28,8 @@
                         <th pSortableColumn="name">Produto <p-sortIcon field="name"></p-sortIcon></th>
                         <th pSortableColumn="image">Imagem <p-sortIcon field="image"></p-sortIcon></th>
                         <th pSortableColumn="quantity">Quantidade <p-sortIcon field="quantity"></p-sortIcon></th>
-                        <th pSortableColumn="price_per_unit">Preço Unitário <p-sortIcon field="price_per_unit"></p-sortIcon></th>
+                        <th pSortableColumn="price_per_unit">Preço Unitário <p-sortIcon
+                                field="price_per_unit"></p-sortIcon></th>
                         <th pSortableColumn="total_price">Preço Total <p-sortIcon field="total_price"></p-sortIcon></th>
                         <th></th>
                     </tr>
@@ -34,11 +42,12 @@
                         </td>
                         <td>
                             <img [src]="item.image" [alt]="item.name" class="my-4 md:my-0 w-9 md:w-10rem shadow-2 mr-5"
-                            (error)="item.image = '/assets/demo/images/product/default.jpg'" />
+                                (error)="item.image = '/assets/demo/images/product/default.jpg'" />
                         </td>
                         <td>
                             <span class="p-column-title">Quantidade</span>
-                            <p-inputNumber [(ngModel)]="item.quantity" mode="decimal" [showButtons]="true" [min]="0" [max]="100" (onInput)="updateCartItem(item.product_id, $event)"></p-inputNumber>
+                            <p-inputNumber [(ngModel)]="item.quantity" mode="decimal" [showButtons]="true" [min]="0"
+                                [max]="100" (onInput)="updateCartItem(item.product_id, $event)"></p-inputNumber>
                         </td>
                         <td>
                             <span class="p-column-title">Preço Unitário</span>
@@ -49,7 +58,8 @@
                             {{item.total_price | currency}}
                         </td>
                         <td>
-                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning" (click)="removeFromCart(item.product_id)"></button>
+                            <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
+                                (click)="removeFromCart(item.product_id)"></button>
                         </td>
                     </tr>
                 </ng-template>
@@ -61,6 +71,28 @@
                     </tr>
                 </ng-template>
             </p-table>
+
+            <p-dialog header="Finalizar Compra" [(visible)]="displayConfirmFinalize" [modal]="true"
+                [style]="{ width: '400px' }">
+                <p>Tem certeza que deseja finalizar a compra?</p>
+                <div class="p-dialog-footer">
+                    <button type="button" pButton icon="pi pi-times" label="Cancelar" class="p-button-text"
+                        (click)="hideConfirmFinalizeDialog()"></button>
+                    <button type="button" pButton icon="pi pi-check" label="Finalizar"
+                        class="p-button-success p-button-text" (click)="finalizePurchase()"></button>
+                </div>
+            </p-dialog>
+
+            <p-dialog header="Limpar Carrinho" [(visible)]="displayConfirmClearCart" [modal]="true"
+                [style]="{ width: '400px' }">
+                <p>Tem certeza que deseja limpar seu carrinho?</p>
+                <div class="p-dialog-footer">
+                    <button type="button" pButton icon="pi pi-times" label="Cancelar" class="p-button-text"
+                        (click)="hideConfirmCleanCartDialog()"></button>
+                    <button type="button" pButton icon="pi pi-check" label="Limpar"
+                        class="p-button-danger p-button-text" (click)="clearCart()"></button>
+                </div>
+            </p-dialog>
         </div>
     </div>
 </div>
