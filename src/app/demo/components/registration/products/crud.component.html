@@ -107,8 +107,10 @@
                 </div>
                 <div class="field">
                     <label for="category_id">Categoria</label>
-                    <input type="number" pInputText id="category_id" [(ngModel)]="product.category_id" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.category_id}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.category_id">Nome é obrigatório.</small>
+                    <select id="category_id" class="p-inputtext" [(ngModel)]="product.category_id" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !category_id}">
+                        <option *ngFor="let category of categories" [ngValue]="category.id">{{ category.name }}</option>
+                    </select>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.category_id">Categoria é obrigatória.</small>
                 </div>
                 <div class="field">
                     <label for="image">Url da Imagem</label>

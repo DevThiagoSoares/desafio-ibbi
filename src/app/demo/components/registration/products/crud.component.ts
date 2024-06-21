@@ -9,9 +9,14 @@ interface Product {
   description: string;
   price: number;
   quantity: number;
-  image: string,
-  category_id: number,
-  priceInUSD?: number
+  image: string;
+  category_id: string; // ou number, dependendo do tipo de id da categoria
+  priceInUSD?: number;
+}
+
+interface Category {
+  id: string; // ou number, dependendo do tipo de id da categoria
+  name: string;
 }
 
 @Component({
@@ -24,12 +29,14 @@ export class CrudComponent implements OnInit {
   deleteProductsDialog: boolean = false;
 
   products: Product[] = [];
-  product: Product = { id: '', name: '', description: '', category_id: null, image: '', price: null, quantity:null };
+  product: Product = { id: '', name: '', description: '', category_id: '', image: '', price: null, quantity: null };
 
   selectedProducts: Product[] = [];
   submitted: boolean = false;
   cols: any[] = [];
   rowsPerPageOptions = [5, 10, 20];
+
+  categories: Category[] = []; // Variável para armazenar as categorias disponíveis
 
   constructor(
     private productService: ApiService, 
@@ -37,10 +44,8 @@ export class CrudComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.productService.listProducts().subscribe((data) => {
-      this.products = data;
-      this.convertPricesToUSD();
-    });
+    this.loadProducts();
+    this.loadCategories();
 
     this.cols = [
       { field: 'name', header: 'Name' },
@@ -51,6 +56,19 @@ export class CrudComponent implements OnInit {
       { field: 'category_id', header: 'Category_Id' },
       { field: 'image', header: 'Image' }
     ];
+  }
+
+  loadProducts() {
+    this.productService.listProducts().subscribe((data) => {
+      this.products = data;
+      this.convertPricesToUSD();
+    });
+  }
+
+  loadCategories() {
+    this.productService.listCategories().subscribe((data) => {
+      this.categories = data;
+    });
   }
 
   openNew() {
@@ -109,7 +127,7 @@ export class CrudComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Produto Atualizado', life: 3000 });
           this.products = [...this.products];
           this.productDialog = false;
-          this.product = { id: '', name: '', description: '', category_id: null, image: '', price: null, quantity:null };
+          this.product = { id: '', name: '', description: '', category_id: '', image: '', price: null, quantity: null };
         });
       } else {
         this.productService.createProduct(this.product).subscribe((data) => {
@@ -118,7 +136,7 @@ export class CrudComponent implements OnInit {
           this.messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Produto Criado', life: 3000 });
           this.products = [...this.products];
           this.productDialog = false;
-          this.product = { id: '', name: '', description: '', category_id: null, image: '', price: null, quantity:null };
+          this.product = { id: '', name: '', description: '', category_id: '', image: '', price: null, quantity: null };
         });
       }
     }
