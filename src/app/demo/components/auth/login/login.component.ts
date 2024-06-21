@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
                     localStorage.removeItem('password');
                     localStorage.removeItem('rememberMe');
                 }
-                this.router.navigate(['/']);
+                this.router.navigate(['/store']);
             },
             (error: any) => {
                 this.errorMessage = 'Login failed. Please check your email and password.';
