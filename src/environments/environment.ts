@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  api_url: process.env.API_URL,
+  api_dollar_url: 'https://api.exchangerate-api.com/v4/latest/BRL'
+  
 };
 
 /*
