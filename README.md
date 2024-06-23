@@ -1,27 +1,93 @@
-# Sakai
+# UI Desafio IBBI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.4.
+Frontend da aplicação feita com Angular para controle de vendas de um e-commerce.
 
-## Development server
+# 🌐 Acessar em Produção
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 🚀 [IBBI Desafio](https://ibbi-ui.vercel.app)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Acesse a aplicação de produção clicando no link acima. Este é o ambiente principal onde você pode ver todas as funcionalidades do projeto em ação.
 
-## Build
+> **Nota:** Certifique-se de revisar todas as funcionalidades e fornecer feedback. Sua opinião é crucial para a melhoria.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
+---
 
-## Running unit tests
+O projeto pode ser startado de 2 maneiras, localmente ou via docker.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## 🚀 Começando
 
-## Running end-to-end tests
+### 📋 Requisitos para Docker
+- Docker: Certifique-se de que o Docker está instalado e em execução.
+- Docker Compose: Verifique se o Docker Compose está instalado.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Isso conclui as instruções para executar o projeto com Docker e os pré-requisitos necessários.
 
-## Further help
+### 🐳 Rodar com Docker
+Para rodar o projeto com Docker, siga os passos abaixo:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+1. **Certifique-se de ter o Docker e o Docker Compose instalados.** Se não tiver, siga as instruções de instalação no site oficial do Docker: [Instalação do Docker](https://docs.docker.com/get-docker/)
+
+2. **Construa e inicie os containers com Docker Compose:**
+    ```
+    docker-compose up --build
+    ```
+
+3. **Acesse a aplicação:**
+   A aplicação estará disponível em `http://localhost:4200`.
+
+
+### 📋 Pré-requisitos
+Certifique-se de ter o Node.js e npm instalados. Recomenda-se usar o Angular CLI para facilitar o desenvolvimento.
+```
+sudo apt update
+sudo apt install nodejs npm
+```
+Verifique sua versão do Node.js:
+```
+node --version
+```
+Verifique sua versão do npm:
+```
+npm --version
+```
+Instale o Angular CLI globalmente:
+
+```
+npm install -g @angular/cli
+```
+Se estiver no Windows, acesse o site oficial do Node.js em nodejs.org e baixe o instalador da versão mais recente do Node.js. Escolha o instalador adequado para o seu sistema (32-bit ou 64-bit).
+
+### 🔧 Instalação e Execução
+Após a configuração do ambiente podemos iniciar a aplicação instalando os dependencias necessárias para rodar a aplicação.
+
+```
+npm install
+```
+
+Inicie o servidor de desenvolvimento:
+
+```
+npm run start 
+```
+ou
+```
+yarn start 
+```
+
+## 🛠️ Construído com
+
+* [Angular](https://angular.dev/) - O framework frontend usado
+* [TypeScript](https://www.sqlalchemy.org/) - ORM de banco de dados
+* [PrimeNG](https://primeng.org/) - Usada para gerar migrations
+* [SAKAI](https://sakai.primeng.org/) - Template base usado
+* [Angular CLI ](https://angular.dev/tools/cli) - Ferramenta de linha de comando para gerenciar projetos Angular
+* [Docker](https://www.docker.com/) - Plataforma para desenvolvimento, envio e execução de aplicações em contêineres
+* [Docker Compose](https://docs.docker.com/compose/) - Ferramenta para definir e gerenciar aplicações Docker multi-contêiner
+
+## 🤝 Contribuição
+Contribuições são bem-vindas! Sinta-se à vontade para abrir um problema ou enviar uma solicitação de pull.
+
+## 📧 Contato
+Se você tiver alguma dúvida, entre em contato pelo e-mail: devthiagosoares@gamil.com

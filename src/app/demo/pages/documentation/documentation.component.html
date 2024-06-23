@@ -1,119 +1,77 @@
 <div class="card mb-3">
     <div>
-        <h2>Documentation</h2>
-        <h4>Getting Started</h4>
-        <p>Sakai is an application template for Angular and is distributed as a CLI project. Current versions is Angular v17 with PrimeNG v17. In case CLI is not installed already, use the command below to set it up.</p>
-    
-<pre class="app-code"><code>npm install -g &#64;angular/cli</code></pre>
-        
-        <p>Once CLI is ready in your system, extract the contents of the zip file distribution, cd to the directory,
-            install the libraries from npm and then execute "ng serve" to run the application in your local environment.</p>
+        <h2>Documentação</h2>
 
-<pre class="app-code"><code>cd sakai
-npm install
-ng serve</code></pre>
-    
-        <p>The application should run at <span class="font-semibold">http://localhost:4200/</span>, you may now start with the development of your application.</p>
-    
-        <h5>Important CLI Commands</h5>
-        <p>Following commands are derived from CLI.</p>
-
-<pre class="app-code"><code>Run 'ng serve' for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-Run 'ng generate component component-name' to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
-
-Run 'ng build' to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-Run 'ng test' to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-Run 'ng e2e' to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-Run 'ng help' for more options.</code></pre>
-    
-        <h4>Structure</h4>
-        <p>Sakai consists of 3 main parts; the application layout, layout assets and PrimeNG component theme assets. Layout is placed inside the <span class="text-primary font-medium">src/app/layout</span> folder,
-            and the assets are in the <span class="text-primary font-medium">src/assets/layout</span> folder.
+        <h4>🌐 Acessar em Produção</h4>
+        <p>
+            <strong>🚀 <a href="https://ibbi-ui.vercel.app" target="_blank">IBBI Desafio</a></strong>
         </p>
-    
-        <h5>Default Configuration</h5>
-        <p>Initial layout configuration can be defined at the main app component by injecting the <span class="text-primary font-medium">LayoutService</span>, this step is optional and only necessary when customizing the defaults. Note that <span class="text-primary font-medium">theme</span> and
-            <span class="text-primary font-medium">scale</span> are not reactive since theme is configured outside of Angular at <strong class="font-semibold">index.html</strong> by default and
-            initial scale is defined with the <span class="text-primary font-medium">$scale</span> at <strong class="font-semibold">layout.scss</strong>. When default theme or scale is changed at their files initially, it is required to configure the layout service with the matching values
-            to avoid sync issues. </p>
-    
-<pre class="app-code"><code>import &#123; Component, OnInit &#125; from '&#64;angular/core';
-import &#123; PrimeNGConfig &#125; from 'primeng/api';
-import &#123; LayoutService, AppConfig &#125; from './layout/service/app.layout.service';
+        <p>
+            Acesse a aplicação de produção clicando no link acima. Este é o ambiente principal onde você pode ver todas as funcionalidades do projeto em ação.
+        </p>
+        <blockquote>
+            <p><strong>Nota:</strong> Certifique-se de revisar todas as funcionalidades e fornecer feedback. Sua opinião é crucial para a melhoria.</p>
+        </blockquote>
 
-&#64;Component(&#123;
-    selector: 'app-root',
-    templateUrl: './app.component.html'
-&#125;)
-export class AppComponent implements OnInit &#123;
+        <hr>
 
-    constructor(private primengConfig: PrimeNGConfig, private layoutService: LayoutService) &#123; &#125;
+        <h4>🚀 Começando</h4>
+        <h5>📋 Requisitos para Docker</h5>
+        <ul>
+            <li>Docker: Certifique-se de que o Docker está instalado e em execução.</li>
+            <li>Docker Compose: Verifique se o Docker Compose está instalado.</li>
+        </ul>
 
-    ngOnInit(): void &#123;
-        this.primengConfig.ripple = true;       //enables core ripple functionality
+        <h5>🐳 Rodar com Docker</h5>
+        <p>Para rodar o projeto com Docker, siga os passos abaixo:</p>
+        <ol>
+            <li>
+                <p><strong>Certifique-se de ter o Docker e o Docker Compose instalados.</strong> Se não tiver, siga as instruções de instalação no site oficial do Docker: <a href="https://docs.docker.com/get-docker/" target="_blank">Instalação do Docker</a></p>
+            </li>
+            <li>
+                <p><strong>Construa e inicie os containers com Docker Compose:</strong></p>
+                <pre class="app-code"><code>docker-compose up --build</code></pre>
+            </li>
+            <li>
+                <p><strong>Acesse a aplicação:</strong> A aplicação estará disponível em <span class="font-semibold">http://localhost:4200</span>.</p>
+            </li>
+        </ol>
 
-        //optional configuration with the default configuration
-        const config: AppConfig = &#123;
-            ripple: false,                      //toggles ripple on and off
-            inputStyle: 'outlined',             //default style for input elements
-            menuMode: 'static',                 //layout mode of the menu, valid values are "static" and "overlay"
-            colorScheme: 'light',               //color scheme of the template, valid values are "light" and "dark"
-            theme: 'lara-light-indigo',         //default component theme for PrimeNG
-            scale: 14                           //size of the body font size to scale the whole application
-        &#125;;
-        this.layoutService.config.set(config);
-    &#125;
+        <h5>📋 Pré-requisitos</h5>
+        <p>Certifique-se de ter o Node.js e npm instalados. Recomenda-se usar o Angular CLI para facilitar o desenvolvimento.</p>
+        <pre class="app-code"><code>sudo apt update
+sudo apt install nodejs npm</code></pre>
+        <p>Verifique sua versão do Node.js:</p>
+        <pre class="app-code"><code>node --version</code></pre>
+        <p>Verifique sua versão do npm:</p>
+        <pre class="app-code"><code>npm --version</code></pre>
+        <p>Instale o Angular CLI globalmente:</p>
+        <pre class="app-code"><code>npm install -g &#64;angular/cli</code></pre>
+        <p>Se estiver no Windows, acesse o site oficial do Node.js em <a href="https://nodejs.org" target="_blank">nodejs.org</a> e baixe o instalador da versão mais recente do Node.js. Escolha o instalador adequado para o seu sistema (32-bit ou 64-bit).</p>
 
-&#125;</code></pre>
-    
-        <h5>Menu</h5>
-        <p>Menu is a separate component defined in <span class="text-primary font-medium">src/app/layout/app.menu.component.ts</span> file and based on PrimeNG MenuModel API. In order to define the menuitems,
-            navigate to this file and define your own model as a nested structure.</p>
-    
-<pre class="app-code"><code>import &#123; OnInit &#125; from '&#64;angular/core';
-import &#123; Component &#125; from '&#64;angular/core';
+        <h5>🔧 Instalação e Execução</h5>
+        <p>Após a configuração do ambiente, podemos iniciar a aplicação instalando as dependências necessárias para rodar a aplicação.</p>
+        <pre class="app-code"><code>npm install</code></pre>
+        <p>Inicie o servidor de desenvolvimento:</p>
+        <pre class="app-code"><code>npm run start</code></pre>
+        <p>ou</p>
+        <pre class="app-code"><code>yarn start</code></pre>
 
-&#64;Component(&#123;
-    selector: 'app-menu',
-    templateUrl: './app.menu.component.html'
-&#125;)
-export class AppMenuComponent implements OnInit &#123;
+        <h5>🛠️ Construído com</h5>
+        <ul>
+            <li><a href="https://angular.dev/" target="_blank">Angular</a> - O framework frontend usado</li>
+            <li><a href="https://www.typescriptlang.org/" target="_blank">TypeScript</a> - Linguagem de programação usada</li>
+            <li><a href="https://primeng.org/" target="_blank">PrimeNG</a> - Biblioteca de componentes UI</li>
+            <li><a href="https://sakai.primeng.org/" target="_blank">SAKAI</a> - Template base usado</li>
+            <li><a href="https://angular.dev/tools/cli" target="_blank">Angular CLI</a> - Ferramenta de linha de comando para gerenciar projetos Angular</li>
+            <li><a href="https://www.docker.com/" target="_blank">Docker</a> - Plataforma para desenvolvimento, envio e execução de aplicações em contêineres</li>
+            <li><a href="https://docs.docker.com/compose/" target="_blank">Docker Compose</a> - Ferramenta para definir e gerenciar aplicações Docker multi-contêiner</li>
+        </ul>
 
-    model: any[] = [];
+        <h5>🤝 Contribuição</h5>
+        <p>Contribuições são bem-vindas! Sinta-se à vontade para abrir um problema ou enviar uma solicitação de pull.</p>
 
-    ngOnInit() &#123;
-        this.model = [
-            &#123;
-                label: 'Home',
-                items: [
-                    &#123;
-                        label: 'Dashboard',
-                        icon: 'pi pi-fw pi-home',
-                        routerLink: ['/']
-                    &#125;
-                ]
-            &#125;,
-            //...
-        ];
-    &#125;
-&#125;</code></pre>
-    
-        <h4>Integration with Existing Angular CLI Projects</h4>
-        <p>Sakai structure is designed in a modular way so that it can easily be integrated with your existing application. We've created a short tutorial with details.</p>
-    
-        <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/yl2f8KKY204" frameborder="0" allowfullscreen></iframe>
-        </div>
-    
-        <h4>Theme</h4>
-        <p>Sakai provides 34 PrimeNG themes out of the box. Setup of a theme is simple by including the css of theme
-            to your bundle that are located inside <span class="text-primary font-medium">assets/layout/styles/theme/</span>
-            folder such as <span class="text-primary font-medium">assets/layout/styles/theme/lara-light-indigo/theme.css</span>.</p>
-
-        <p>Another alternative would be creating dynamic bundles, please see the <a href="https://www.youtube.com/watch?v=5VOuUdDXRsE" class="font-medium text-primary hover:underline">video tutorial</a> for an example.</p>
+        <h5>📧 Contato</h5>
+        <p>Se você tiver alguma dúvida, entre em contato pelo e-mail: <strong>devthiagosoares&#64;gmail.com</strong></p>
     </div>
 </div>
