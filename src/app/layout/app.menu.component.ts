@@ -19,14 +19,14 @@ export class AppMenuComponent implements OnInit {
                 items: [
                     { label: 'Loja', icon: 'pi pi-shopping-bag', routerLink: ['store'] },
                     {
-                        label: 'Controle de Produtos',
-                        icon: 'pi pi-fw pi-sitemap',
-                        routerLink: ['/registration/products']
-                    },
-                    {
                         label: 'Controle de Categorias',
                         icon: 'pi pi-fw pi-sitemap',
                         routerLink: ['/registration/categories']
+                    },
+                    {
+                        label: 'Controle de Produtos',
+                        icon: 'pi pi-fw pi-sitemap',
+                        routerLink: ['/registration/products']
                     },
                     {
                         label: 'Carrinho de compras',

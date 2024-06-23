@@ -115,7 +115,7 @@
                 <div class="field">
                     <label for="image">Url da Imagem</label>
                     <input type="text" pInputText id="image" [(ngModel)]="product.image" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.image}"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.image">Nome é obrigatório.</small>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.image">Imagem é obrigatório.</small>
                 </div>
                 
             </ng-template>

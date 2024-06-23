@@ -36,7 +36,7 @@ export class CrudComponent implements OnInit {
   cols: any[] = [];
   rowsPerPageOptions = [5, 10, 20];
 
-  categories: Category[] = []; // Variável para armazenar as categorias disponíveis
+  categories: Category[] = [];
 
   constructor(
     private productService: ApiService, 
