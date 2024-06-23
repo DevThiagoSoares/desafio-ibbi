@@ -54,8 +54,7 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['/store']);
             },
             (error: any) => {
-                this.errorMessage = 'Login failed. Please check your email and password.';
-                console.error('Login failed', error);
+                this.errorMessage = 'Login falhou. Por favor verifique seu email e senha.';
             }
         );
     }
